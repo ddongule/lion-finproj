@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.utils import timezone
+from django.core.paginator import Paginator
+from .models import Post
 
 # Create your views here.
 def home(request):
@@ -12,3 +15,11 @@ def free_board(request):
 
 def inquire(request):
   return render(request,'inquire.html')
+
+def notice(request):
+  posts = Post.objects
+  posts_list = Post.objects.all()
+  paginator = Paginator(posts_list,5)
+  page = request.GET.get('page')
+  pages = paginator.get_page(page)
+  return render(request, 'notice.html',{'posts':posts, 'pages':pages})
