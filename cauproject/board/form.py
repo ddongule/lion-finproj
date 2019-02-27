@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post,Notice
+from .models import Post,Notice,Comment
 
 class PostPost(forms.ModelForm):
   class Meta:
@@ -10,3 +10,8 @@ class NoticePost(forms.ModelForm):
   class Meta:
     model = Notice
     fields = ['title','body']
+
+class CommentPost(forms.ModelForm):
+  class Meta:
+    model = Comment
+    fields = ['nickName','body']

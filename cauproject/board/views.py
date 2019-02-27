@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.core.paginator import Paginator
-from .models import Post,Notice
-from .form import PostPost, NoticePost
+from .models import Post,Notice,Comment
+from .form import PostPost, NoticePost, CommentPost
 
 # Create your views here.
 def home(request):
@@ -21,7 +21,19 @@ def free_board(request):
 
 def free_board_detail(request,post_id):
   details = get_object_or_404(Post, pk = post_id)
-  return render(request, 'free_board_detail.html',{'details':details})
+  comments = Comment.objects.all()
+  comments = comments.filter(post_id = details.id)
+  if request.method == 'POST':
+    form = CommentPost(request.POST)
+    if form.is_valid():
+      comment = form.save(commit=False)
+      comment.pub_date = timezone.now()
+      comment.post_id = details.id
+      comment.save()
+      return redirect('/board/free_board/'+str(details.id))
+  else:
+    form = CommentPost()
+    return render(request, 'free_board_detail.html',{'details':details,'form':form,'comments':comments})
 
 def free_board_new(request):
   if request.method == 'POST':

@@ -21,3 +21,12 @@ class Notice(models.Model):
   def __str__(self):
     return self.title
   
+class Comment(models.Model):
+  nickName = models.CharField(max_length=20, default = 'nick name')
+  pub_date = models.DateTimeField(auto_now_add = True)
+  body = models.CharField(max_length = 200)
+  post_id = models.IntegerField()
+  # post_id = models.ForeignKey(Post, on_delete = models.CASCADE)
+
+  def __str__(self):
+    return self.body

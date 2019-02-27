@@ -18,4 +18,20 @@
     </div>
   </body>
 
+</br></br>
+<h3>댓글</h3></br>
+{%for comment in comments%}
+  <p>닉네임 : {{comment.nickName}}</p>
+  <p>댓글 : {{comment.body}}</p></br>
+{%endfor%}
+</br></br>
+<h3>댓글 달기</h3></br>
+<form method = "POST">
+  {%csrf_token%}
+  <table>
+    {{form.as_table}}
+  </table>
+  </br>
+  <input class = "btn btn-dark" type = "submit" value = "댓글 등록">
+</form>
 {% endblock %}
