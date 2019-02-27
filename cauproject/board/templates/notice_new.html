@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+  <h2>공지사항 쓰기</h2>
+  <form method = "POST">
+    {%csrf_token%}
+    <table>
+      {{form.as_table}}
+    </table>
+    </br>
+    <input class = "btn btn-dark" type = "submit" value = "등록하기">
+  </form>
+{% endblock%}
