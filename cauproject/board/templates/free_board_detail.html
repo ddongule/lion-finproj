@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+  <body>
+    </br>
+    <div class="container">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <h1>{{details.title}}</h1>
+      </div>
+      <div class="alert alert-secondary" role="alert">
+        <h6>{{details.nickName}}</h6>
+        <p>{{details.pub_date}}</p>
+        <p>{{details.body}}</p>
+      </div>
+      <a href = "/" class="btn btn-info">처음으로 돌아가기</a>
+      <a href = "{%url 'free_board'%}" class="btn btn-warning">목록으로 돌아가기</a>
+    </div>
+  </body>
+
+</br></br>
+<h3>댓글</h3></br>
+{%for comment in comments%}
+  <p>닉네임 : {{comment.nickName}}</p>
+  <p>댓글 : {{comment.body}}</p></br>
+{%endfor%}
+</br></br>
+<h3>댓글 달기</h3></br>
+<form method = "POST">
+  {%csrf_token%}
+  <table>
+    {{form.as_table}}
+  </table>
+  </br>
+  <input class = "btn btn-dark" type = "submit" value = "댓글 등록">
+</form>
+{% endblock %}

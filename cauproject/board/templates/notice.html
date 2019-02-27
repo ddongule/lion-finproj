@@ -3,13 +3,17 @@
 {% block contents %}
 <h1>공지사항</h1>
 
+<a href = "{%url 'notice_new'%}">글쓰기</a>
+
 {%for notice in pages%}
-<div class = "card">
-  <div class="card-body">
-    <h5 class="card-title">{{notice.title}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">{{notice.pub_date}}</h6>
+<a href = "{%url 'notice_detail' notice.id%}">
+  <div class = "card">
+    <div class="card-body">
+      <h5 class="card-title">{{notice.title}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{notice.pub_date}}</h6>
+    </div>
   </div>
-</div>
+</a>
 {%endfor%}
 
 <div class = "container">

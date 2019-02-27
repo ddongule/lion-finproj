@@ -3,13 +3,16 @@
 {% block contents %}
 <h1>자유 게시판</h1>
 
+<a href = "{%url 'free_board_new'%}">글쓰기</a>
+
 {%for post in pages%}
 <div class = "card">
   <div class="card-body">
     <h5 class="card-title">{{post.title}}</h5>
+    <h6 class="card-title">{{post.nickName}}</h6>
     <h6 class="card-subtitle mb-2 text-muted">{{post.pub_date}}</h6>
     <p class="card-text">{{post.summary}}</p>
-    <a href="#" class="card-link">...more</a>
+    <a href="{%url 'free_board_detail' post.id%}" class="card-link">...more</a>
   </div>
 </div>
 {%endfor%}
@@ -28,4 +31,5 @@
   <a href="?page={{pages.paginator.num_pages}}">Last</a>
   {%endif%}
 </div>
+
 {% endblock %}
